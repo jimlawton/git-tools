@@ -32,17 +32,17 @@ def hasChanges(repo):
     return False
 
 def printChanges(repo, path):
-    text = "%s: " % path
+    states = []
     if hasChanges(repo):
         if hasUntracked(repo):
-            text += "untracked"
+             states.append("untracked")
         if hasUnstaged(repo):
-            text += ", unstaged"
+            states.append("unstaged")
         if hasUncommitted(repo):
-            text += ", uncommitted"
+            states.append("uncommitted")
         if hasUnpushed(repo):
-            text += ", unpushed"
-    print text
+            states.append("unpushed")
+    print "%s: %s" % (path, ', '.join(states))
 
 for dirname in sorted(os.listdir(TOP)):
     path = os.path.join(TOP, dirname)
